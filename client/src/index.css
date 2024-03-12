@@ -1,0 +1,45 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.flex-start {
+    @apply flex justify-start items-start
+}
+
+.flex-center {
+    @apply flex justify-center items-center
+}
+
+.flex-between {
+    @apply flex justify-between items-center
+}
+
+.flex-end {
+    @apply flex justify-end items-end
+}
+
+.input {
+    @apply  bg-black text-white px-4 py-2
+}
+
+.form {
+    @apply bg-[#414141] px-4 py-2 pb-4 text-white flex flex-col
+}
+
+.span {
+    @apply font-semibold text-[18px]
+}
+.image {
+    @apply object-contain rounded-full text-black
+}
+.topbar {
+    @apply bg-[#57acf7] text-white px-8 py-3 rounded-r-lg flex justify-between items-center
+}
+.usercard {
+    @apply bg-gray-100 w-full mb-1 py-2 rounded-xl px-2 cursor-pointer
+}
+.chatbar {
+    @apply bg-white
+}
