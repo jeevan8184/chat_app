@@ -216,7 +216,7 @@ const Page = () => {
            </div>
             <div className=' flex gap-2'>
                 <>
-                <input 
+                <input   
                     type='text' 
                     placeholder=' send msgs...'
                     value={text} 

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Drawer from './Drawer';
 import { getUser } from '../../api';
 
-const Topbar = () => {
+const Topbar = ({children}) => {
   
   const [user, setUser] = useState(JSON.parse(localStorage?.getItem('profile'))?.data);
   const [orgUser, setOrgUser] = useState({});
@@ -13,9 +13,7 @@ const Topbar = () => {
     const newFunc=async()=> {
       if(user) {
         const author=user?._id;
-        // console.log('author',author);
         const data=await getUser(author);
-        // console.log('data',data);
         setOrgUser(data?.data);
       }
     }
@@ -25,14 +23,17 @@ const Topbar = () => {
   // console.log(orgUser);
 
   return (
-    <div className='topbar'>
+    <div className='topbar flex '>
       <div className=''>
         <div className=' flex flex-row items-center gap-2'>
           <Link to='/'><ChatIcon fontSize='large' /></Link>
-          <h1 className=' text-3xl font-semibold '>Chat System</h1>
+          <h1 className=' text-2xl font-semibold '>Chat System</h1>
         </div>
       </div>
-      <Drawer orgUser={orgUser} setOrgUser={setOrgUser} />
+      <div className=' flex-end float-end items-center absolute right-3'>
+        <Drawer orgUser={orgUser} setOrgUser={setOrgUser} />
+      </div>
+      {children}
     </div>
     
   )

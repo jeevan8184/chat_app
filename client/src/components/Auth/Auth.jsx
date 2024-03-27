@@ -6,7 +6,7 @@ import GoogleIcon from '@mui/icons-material/Google';
 import { useNavigate } from 'react-router-dom';
 import {useDispatch} from 'react-redux'
 import { SignIn, SignUp } from '../../actions';
-import {GoogleLogin} from 'react-google-login';
+// import {GoogleLogin} from 'react-google-login';
 import {gapi} from 'gapi-script'
 
 const Auth = () => {

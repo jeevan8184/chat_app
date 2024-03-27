@@ -1,27 +1,28 @@
 
-import mongoose, { Schema, model, models } from "mongoose";
+import mongoose, { Schema, model } from "mongoose";
 
 const MessageSchema=new Schema({
-    text:[
-        {
-            type:String
-        }
-    ],
+    
+    text:{type:String,required:true},
     sender:{
         type:mongoose.Types.ObjectId,
-        ref:'Onboarding'
+        ref:'Onboarding',
+        required:true
     },
     receiver:{
         type:mongoose.Types.ObjectId,
-        ref:'Onboarding'
+        ref:'Onboarding',
     },
     createdAt:{
         type:Date,
         default:new Date().toISOString()
     },
-
+    read:{
+        type:Boolean,
+        default:false
+    }
 })
 
-const Messages=model('Messages',MessageSchema) || models(Messages);
+const ChatMessages=model('Messages',MessageSchema) || mongoose.models(Messages);
 
-export default Messages;
+export default ChatMessages;

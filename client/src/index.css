@@ -35,11 +35,27 @@
     @apply object-contain rounded-full text-black
 }
 .topbar {
-    @apply bg-[#57acf7] text-white px-8 py-3 rounded-r-lg flex justify-between items-center
+    @apply bg-[#57acf7] text-white px-6 py-3 rounded-r-lg
 }
 .usercard {
     @apply bg-gray-100 w-full mb-1 py-2 rounded-xl px-2 cursor-pointer
 }
 .chatbar {
     @apply bg-white
+}
+
+.mainUser {
+    @apply font-semibold px-3 py-0.5 rounded-lg bg-white float-end flex-end
+}
+
+.user {
+    @apply font-semibold float-start px-3 py-0.5 rounded-lg bg-white flex-start
+}
+
+.add {
+    @apply hover:bg-gray-300 w-full px-2 py-0.5 rounded-md hover:font-semibold
+}
+
+.selectUser {
+    @apply max-sm:px-1 py-1 bg-gray-100 rounded-2xl mx-2 cursor-pointer
 }

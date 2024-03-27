@@ -1,12 +1,18 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import {Button} from '@mui/material'
-import { useParams } from 'react-router-dom'
-import { PostData, getData } from '../../api';
+import { useLocation, useParams } from 'react-router-dom'
+import { PostData, getData, getUserWithId } from '../../api';
 import {useDropzone} from 'react-dropzone';
 import { useNavigate } from 'react-router-dom';
 
+function useQuery() {
+  return new URLSearchParams(useLocation().search)
+}
+
 const Onboarding = () => {
   const {id}=useParams();
+  const query=useQuery();
+  const userId=query.get('userId');
   const Naviagate=useNavigate();
   const initState={ profilePic:'/assets/profile.svg', username:'', bio:'',author:''}
   const [formData, setFormData] = useState(initState);
@@ -25,10 +31,23 @@ const Onboarding = () => {
           preview: URL.createObjectURL(file),
         }),
       ]);
+      setFormData((prevData)=> ({...prevData,profilePic:uploadedImage[0]?.preview}));
     }
   }, []);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+
+  useEffect(()=> {
+    const newFunc=async()=> {
+      if(userId) {
+        const newOnboard=await getUserWithId(userId);
+        console.log('newBoard',newOnboard.data);
+        setFormData((prevData)=> ({...prevData,profilePic:newOnboard.profilePic,username:newOnboard.username,bio:newOnboard.bio}));
+
+      }
+    }
+    newFunc();
+  },[userId])
 
   useEffect(()=> {
      const newFunc=async()=> {
@@ -60,14 +79,10 @@ const Onboarding = () => {
           <div className='flex gap-10 items-center'>
             <div className=''>
                 <div className=' h-24 w-24 bg-[#2B2B2B] rounded-full flex-center'>
-                  { uploadedImage.length>0 ? (
-                    <>
-                      <img src={uploadedImage[0]?.preview} alt='profilepic' height={96} width={96} className=' rounded-full object-cover' />
-                    </>
-                  ):(
-                    <>
+                  {formData.profilePic==='/assets/profile.svg' ? (
                     <img src={formData.profilePic} alt='profilepic' height={28} width={28} className='image' />
-                    </>
+                  ):(
+                    <img src={uploadedImage[0]?.preview} alt='profilepic' height={96} width={96} className=' rounded-full object-cover' />
                   )}
               </div>
             </div>
